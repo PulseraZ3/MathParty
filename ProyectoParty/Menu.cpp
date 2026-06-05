@@ -47,5 +47,14 @@ void menuPrincipal() {
 	cout << "| $$      | $$  | $$| $$  | $$   | $$       | $$    ";
 	Console::SetCursorPosition(ANCHO_PANTALLA / 2, (ALTO_PANTALLA / 6) + 7);
 	cout << "|__/      |__/  |__/|__/  |__/   |__/       |__/    ";
-	_getch();
+	//play
+	Console::ForegroundColor = ConsoleColor::DarkYellow;
+	Console::SetCursorPosition((ANCHO_PANTALLA / 3)+5, (ANCHO_PANTALLA / 7));
+	cout << " _____ __    _____ __ __ ";
+	Console::SetCursorPosition((ANCHO_PANTALLA / 3)+5, (ANCHO_PANTALLA / 7)+1);
+	cout << "|  _  |  |  |  _  |  |  |";
+	Console::SetCursorPosition((ANCHO_PANTALLA / 3)+5, (ANCHO_PANTALLA / 7)+2);
+	cout << "|   __|  |__|     |_   _|";
+	Console::SetCursorPosition((ANCHO_PANTALLA / 3)+5, (ANCHO_PANTALLA / 7)+3);
+	cout << "|__|  |_____|__|__| |_|  ";
 }
