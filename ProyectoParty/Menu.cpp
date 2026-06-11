@@ -1,4 +1,5 @@
 #include "Menus.h"
+#include "Game.h"
 #include <iostream>
 #include <conio.h>
 #define ANCHO_PANTALLA 120
@@ -9,25 +10,38 @@ void pantalla() {
 	Console::SetWindowSize(ANCHO_PANTALLA, ALTO_PANTALLA);
 	Console::CursorVisible = false;
 }
-void menuPrincipal() {
-	pantalla();
-	//Math
+void menuJuego() {
+
+}
+void menuConfiguracion() {
+	system("cls");
+	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA / 10));
+	cout << "  ___  __   __ _  ____  __  ___ ";
+	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA / 10) + 1);
+	cout << " / __)/  \\ (  ( \\(  __)(  )/ __)";
+	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA / 10) + 2);
+	cout << "( (__(  O )/    / ) _)  )(( (_ \\";
+	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA / 10) + 3);
+	cout << " \\___)\\__/ \\_)__)(__)  (__)\\___/";
+	_getch();
+}
+void tituloPrincipal() {
 	Console::ForegroundColor = ConsoleColor::Blue;
-	Console::SetCursorPosition(ANCHO_PANTALLA/10, (ALTO_PANTALLA/6));
+	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA / 6));
 	cout << "$$\\      $$\\  $$$$$$\\ $$$$$$$$\\ $$\\   $$\\";
-	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA/6)+1);
+	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA / 6) + 1);
 	cout << "$$$\\    $$$ |$$  __$$\\\\__$$  __|$$ |  $$ |";
-	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA/6)+2);
+	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA / 6) + 2);
 	cout << "$$$$\\  $$$$ |$$ /  $$ |  $$ |   $$ |  $$ |";
-	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA/6)+3);
+	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA / 6) + 3);
 	cout << "$$\\$$\\$$ $$ |$$$$$$$$ |  $$ |   $$$$$$$$ |";
-	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA/6)+4);
+	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA / 6) + 4);
 	cout << "$$ \\$$$  $$ |$$  __$$ |  $$ |   $$  __$$ |";
-	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA/6)+5);
+	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA / 6) + 5);
 	cout << "$$ |\\$  /$$ |$$ |  $$ |  $$ |   $$ |  $$ |";
-	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA/6)+6);
+	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA / 6) + 6);
 	cout << "$$ | \\_/ $$ |$$ |  $$ |  $$ |   $$ |  $$ |";
-	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA/6)+7);
+	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA / 6) + 7);
 	cout << "\\__|     \\__|\\__|  \\__|  \\__|   \\__|  \\__|";
 	// Party
 	Console::ForegroundColor = ConsoleColor::Magenta;
@@ -47,14 +61,46 @@ void menuPrincipal() {
 	cout << "| $$      | $$  | $$| $$  | $$   | $$       | $$    ";
 	Console::SetCursorPosition(ANCHO_PANTALLA / 2, (ALTO_PANTALLA / 6) + 7);
 	cout << "|__/      |__/  |__/|__/  |__/   |__/       |__/    ";
+
 	//play
 	Console::ForegroundColor = ConsoleColor::DarkYellow;
-	Console::SetCursorPosition((ANCHO_PANTALLA / 3)+5, (ANCHO_PANTALLA / 7));
+	Console::SetCursorPosition((ANCHO_PANTALLA / 3) + 5, (ANCHO_PANTALLA / 7));
 	cout << " _____ __    _____ __ __ ";
-	Console::SetCursorPosition((ANCHO_PANTALLA / 3)+5, (ANCHO_PANTALLA / 7)+1);
+	Console::SetCursorPosition((ANCHO_PANTALLA / 3) + 5, (ANCHO_PANTALLA / 7) + 1);
 	cout << "|  _  |  |  |  _  |  |  |";
-	Console::SetCursorPosition((ANCHO_PANTALLA / 3)+5, (ANCHO_PANTALLA / 7)+2);
+	Console::SetCursorPosition((ANCHO_PANTALLA / 3) + 5, (ANCHO_PANTALLA / 7) + 2);
 	cout << "|   __|  |__|     |_   _|";
-	Console::SetCursorPosition((ANCHO_PANTALLA / 3)+5, (ANCHO_PANTALLA / 7)+3);
+	Console::SetCursorPosition((ANCHO_PANTALLA / 3) + 5, (ANCHO_PANTALLA / 7) + 3);
 	cout << "|__|  |_____|__|__| |_|  ";
+	Console::SetCursorPosition((ANCHO_PANTALLA / 3) + 10, (ANCHO_PANTALLA / 7) + 4);
+	cout << "Press 1 to Play";
+
+}
+
+void menuPrincipal() {
+	pantalla();
+	//Math
+	char tecla;
+	Jugador jugadores[2];
+
+	while (true){
+		system("cls");
+		tituloPrincipal();
+		//Falta el config
+			tecla = _getch();
+			switch (tecla) {
+			case '1':
+				//ingresoDatos(jugadores);
+				iniciarJuego();
+				break;
+			case '2': 
+				menuConfiguracion();
+				break;
+			case '3':
+				return;
+				break;
+			}
+
+	}
+	
 }

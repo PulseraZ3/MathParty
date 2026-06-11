@@ -10,4 +10,5 @@ struct Jugador
 	int estrellas;
 	Objeto inventario[3];
 	int cantidadObjetos;
+	char avatar;
 };
