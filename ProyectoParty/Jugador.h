@@ -5,6 +5,7 @@
 struct Jugador
 {
 	std::string nombre;
+	int mapaActual;
 	int posicion;
 	int monedas;
 	int estrellas;

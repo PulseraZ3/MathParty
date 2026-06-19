@@ -1,3 +1,4 @@
 ﻿  game.cpp
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\game.cpp(550,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
   game.obj : se encontró un módulo MSIL; vinculación incremental deshabilitada para MSIL; ejecutando vínculo completo
   ProyectoParty.vcxproj -> C:\Users\Leona\source\repos\ProyectoParty\x64\Debug\ProyectoParty.exe
