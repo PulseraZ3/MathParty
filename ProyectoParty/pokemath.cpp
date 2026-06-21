@@ -8,7 +8,7 @@
 
 using namespace std;
 using namespace System;
-
+//titulo
 void tituloInicio(int x, int y) {
 	string math[] =
 	{
@@ -36,7 +36,7 @@ void tituloInicio(int x, int y) {
 	Console::Clear();
 
 }
-
+//interfaz copia y pega de la que use en partyMath
 void intefazPokeMath() {
 	Console::Clear();
 
@@ -75,9 +75,12 @@ void intefazPokeMath() {
 	}
 
 }
+//aca usamos probabilidades esto sera util para la eficacia de los ataques unicamente latigo y gruñido
 int probabilidad() {
 	return (rand() % 10) + 1;
 }
+
+//la vida fundamental use lo que enseño de un laberinto y simplemente era quitar
 void interfazVida(Pokemon& p,bool enemigo,Jugador& j) {
 	int x = enemigo ? 5 : 90;
 	int y = enemigo ? 4 : 15;

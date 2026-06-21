@@ -8,7 +8,7 @@ using namespace std;
 using namespace System;
 #define MAPAS 5
 #define CASILLAS 15
-
+//definicion del mapa C = "Casilla comun" O = "casilla rara" y R = "juegos" solo un juego por mapa
 char mapas[MAPAS][CASILLAS] =
 {
 	{'C','C','C','O','C','C','O','C','C','C','C','C','O','C','R'},
@@ -17,6 +17,8 @@ char mapas[MAPAS][CASILLAS] =
 	{'C','C','C','O','C','C','O','C','C','C','C','C','O','C','R'},
 	{'C','C','C','O','C','C','O','C','C','C','C','C','O','C','R'}
 };
+
+//avatars de los juegadores, solo disponibles 5
 string avatar1[] = {
 		"    1      ",
 		"   _O_      ",
@@ -62,6 +64,7 @@ string avatar5[] = {
 		"| ,___|    ",
 		"|    /     "
 };
+//fondo, en este caso Nivel 1 : Viejo Oeste
 string casa[] = {
 	"         _",
 	"      _-'_'-_",
@@ -89,6 +92,9 @@ string vaquerosIz[] = {
 	"  \\-|\\",
 	"   / \\"
 };
+
+//fondo, en este caso Nivel 2 : PokeMath
+
 string arbol[] = {
 	"    .-^-.",
 	"   /     \\",
@@ -101,6 +107,7 @@ string hierba[] = {
 	" \\|/ \\|/",
 	"  |   |  ",
 };
+//fondo, en este caso Nivel 3: Mundo marino
 string tiburon[] = {
 	"       .   )\\ ",
 	"       \\`.-' `-oo",
@@ -129,6 +136,7 @@ string castilloAcuatico[] = {
 	"____|_:_:_|           |_:_:_|",
 	".  `|_:_:_|           |_:_:_|"
 };
+//fondo, en este caso Nivel 4 : Medieval
 string castilloRojo[] = {
 	"         o___.-' /",
 	"         |      _\\_",
@@ -165,9 +173,13 @@ string canonIz[] = {
 	"      --:* =---|-_",
 	"       ` '     \\(O)_.",
 };
+
+//creacion del turno de personaje
 int turnoPersonaje() {
 	return rand() % 6 + 1;
 }
+
+//utilizacion del dado de Mayumi
 void creacionDadito(int d)
 {
 	char a = char(218); // ┌
@@ -278,7 +290,7 @@ void creacionDadito(int d)
 
 	}
 }
-
+//lanzar dado, en este caso son dos veces, reciber la cantidad de veces que se lanzara dado
 int lanzarDado(int cantidadDado) {
 	int suma = 0;
 	for (int i = 1; i <= cantidadDado; i++) {
@@ -288,7 +300,8 @@ int lanzarDado(int cantidadDado) {
 	}
 	return suma;
 }
-
+//interfaz de menu avatar, donde se usan for para el borde ******
+//se dibuja los avatars.
 void interfazAvatar() {
 	system("cls");
 	for (int i = 1; i <= ANCHO_PANTALLA - 20;i++) {
@@ -351,6 +364,7 @@ void interfazAvatar() {
 	Console::ForegroundColor = ConsoleColor::White;
 	cout << "   W      ";
 }
+//ingreso de nombre, integaz de ingresos 
 void interfazNombre(int numPersonaje) {
 	system("cls");
 	interfazAvatar();
@@ -358,7 +372,7 @@ void interfazNombre(int numPersonaje) {
 	Console::SetCursorPosition((ANCHO_PANTALLA / 2) - 10, ALTO_PANTALLA/2);
 	cout << "Ingrese su nombre "<<numPersonaje<<endl;
 }
-
+// evaluamos el numAvatar y dependiendo del numero tendra un avatar de char deiferentes
 char ingresoAvatar(int numAvatar) {
 	switch (numAvatar) {
 	case 1:
@@ -381,6 +395,11 @@ char ingresoAvatar(int numAvatar) {
 	}
 	
 }
+
+//primeor agarramos al jugador j y su opcion lo cual debe ingresar
+// evaluamos la opcion, si elegio = avatar 1 en este caso, case 1 se pondra elegido = avatar1,
+//ahora dibujamos en j.dibujo[] le pojnemos que sea igual al elegido[] 
+//basicamente para escribir lo que tenemos en j.dibujo y ya xd
 void asiganarAvatar(Jugador& j, int opcion) {
 	string* elegido;
 	switch (opcion) {
@@ -394,6 +413,7 @@ void asiganarAvatar(Jugador& j, int opcion) {
 		j.dibujo[i] = elegido[i];
 	}
 }
+//aca se ingresan datos basicmos como nombre y avatar que arriba se esta agarrando.
 void ingresoDatos(Jugador jugadores[]) {
 	int avatar;
 	for (int i =0; i < 2;i++) {
@@ -408,8 +428,9 @@ void ingresoDatos(Jugador jugadores[]) {
 		_getch();
 	}
 }
+//aca primero agarramos los datos del jugador y x y es para mero posicionamiento
 void dibujarAvatar(Jugador& j, int x, int y) {
-	for (int i = 1; i < 7; i++) {
+	for (int i = 1; i < 7; i++) {//el avatar tiene de ancho 7 y de alto 7 le puse 20 para que sea mas grande y se borre, sobretodo en la parte de pokemath, fue lo que mejor se me ocurrio
 		Console::SetCursorPosition(x, y + i);
 		cout << string(20, ' ');
 	}
@@ -418,6 +439,7 @@ void dibujarAvatar(Jugador& j, int x, int y) {
 		cout << j.dibujo[i];
 	}
 }
+//aca primero dependiendo del tipo de se dibuja lo siguiente
 void dibujarCasilla(int x, int y, char tipo)
 {
 	if (tipo == 'C')
@@ -462,19 +484,22 @@ void dibujarCasilla(int x, int y, char tipo)
 		cout << "  \\/  ";
 	}
 }
+
+//aca tenemos la cantidad de posiciones, en este caso agarrramos jugador ejemplo j1, ahora la cantidad de posiociones en este caso es lo que salga del dado
 void moverJugador(Jugador& j, int pasos)
 {
-	if (j.esperando) return;
+	if (j.esperando) return;//si el jugador esta esperando entonces ejecutamos return para que se acabe la funcion
 
-	j.posicion += pasos;
+	j.posicion += pasos; // de lo contrario hacemos que avance las posiciones que es igual a tu posicion actual ya sea = 0 j1.posicion = j1.posicion+pasos en este caso ponte que sacas 12 en el dado
 
-	if (j.posicion >= CASILLAS)
+	if (j.posicion >= CASILLAS) // si posiciones es mayor a casillas en este caso 
 	{
-		j.posicion = CASILLAS - 1; 
-		if (j.mapaActual < MAPAS - 1)
-			j.esperando = true;
+		j.posicion = CASILLAS - 1; //tu posicion cambia a la casilla actual -1
+		if (j.mapaActual < MAPAS - 1) // si el mapaactual es menor a mapas-1 en este caso 
+			j.esperando = true; // si llegas al final vaya
 	}
 }
+//en este caso validamos si llegan al final de un mapa, lo que hacemos que los enviamos al siguiente mapa y reiniciamos sus posiciones a 0.
 void revisarAvanceMapa(Jugador& j1, Jugador& j2)
 {
 	if (j1.esperando && j2.esperando)
@@ -490,6 +515,8 @@ void revisarAvanceMapa(Jugador& j1, Jugador& j2)
 		if (j2.mapaActual >= MAPAS) j2.mapaActual = MAPAS - 1;
 	}
 }
+
+//dependiendo del mapa tiene un diferente fondo y ya xd
 void fondoMapa(int mapa) {
 
 	switch (mapa) {
@@ -594,7 +621,10 @@ void fondoMapa(int mapa) {
 		break;
 	}
 }
-void eventosCasillas(Jugador& j,Jugador& j2, bool& pokeMathJugado) {
+
+//dependiendo de la casilla en la que caigas ocurre algo, podria agregar mas n ose xd
+
+void eventosCasillas(Jugador& j,Jugador& j2, bool& pokeMathJugado, bool& artiJugado, bool& reflejosJugado) {
 	char casillas = mapas[j.mapaActual][j.posicion];
 		if (casillas == 'O') {
 			j.monedas += 5;
@@ -606,35 +636,53 @@ void eventosCasillas(Jugador& j,Jugador& j2, bool& pokeMathJugado) {
 			fondoMapa(j.mapaActual);
 			dibujarMarco();
 		}
+		if (casillas == 'R' && j.mapaActual == 4 && !artiJugado) {
+			juego_artilleria(j, j2);
+			artiJugado = true;
+			Console::Clear();
+			fondoMapa(j.mapaActual);
+			dibujarMarco();
+		}
+		if (casillas == 'R' && j.mapaActual == 1 && !reflejosJugado) {
+			juegoreflejos(j, j2);
+			reflejosJugado = true;
+			Console::Clear();
+			fondoMapa(j.mapaActual);
+			dibujarMarco();
+		}
 
 	
 }
+//en este caso uso mi lanzar dado(2) 2 significa la cantidad de dados que vamos a lanzar y bueno retorna los pasos que a avanzara
 int turnoJugador(Jugador& j)
 {
 	int pasos = lanzarDado(2);
 	moverJugador(j, pasos);
 	return pasos;
 }
+
+//ya aca es el mapa recibimos los dos jugadores, solo necitamos la posiicon avatar y mapaactual
 void dibujarMapa(Jugador& j1, Jugador& j2)
 {
+	//primero definimos la posicion inicial del mapa 
 	int baseX = 25;
 	int baseY = 13;
-	int anchoCasilla = 6;
+	int anchoCasilla = 6; 
 
-	for (int i = 0; i < CASILLAS; i++)
+	for (int i = 0; i < CASILLAS; i++) //aca hacemos un for con la cantidad de casillas
 	{
-		int x = baseX + i * anchoCasilla;
-		char tipo = mapas[j1.mapaActual][i];
+		int x = baseX + i * anchoCasilla; //calculamos la posiicon horizontal 
+		char tipo = mapas[j1.mapaActual][i]; //obtemeos el tipo de casilla
 
-		bool j1Aqui = (i == j1.posicion && j1.mapaActual == j1.mapaActual); 
+		bool j1Aqui = (i == j1.posicion && j1.mapaActual == j1.mapaActual);  
 		bool j2Aqui = (i == j2.posicion && j2.mapaActual == j1.mapaActual);
 
 		string centro = "    "; 
-		if (j1Aqui && j2Aqui)      centro = string(" ") + j1.avatar + j2.avatar + " ";
-		else if (j1Aqui)           centro = string("  ") + j1.avatar + " ";
-		else if (j2Aqui)           centro = string("  ") + j2.avatar + " ";
-		if (tipo == 'C')
-		{
+		if (j1Aqui && j2Aqui)      centro = string(" ") + j1.avatar + j2.avatar + " "; // si estan ambos
+		else if (j1Aqui)           centro = string("  ") + j1.avatar + " "; // si solo esta jugador 1 
+		else if (j2Aqui)           centro = string("  ") + j2.avatar + " "; // si solo esta jugador 2
+		if (tipo == 'C') //aca estamos dibujando la casilla con el avatar adentro 
+		{ 
 			Console::ForegroundColor = (j1Aqui || j2Aqui) ? ConsoleColor::Yellow : ConsoleColor::Blue;
 			Console::SetCursorPosition(x, baseY);     cout << "+----+";
 			Console::SetCursorPosition(x, baseY + 1); cout << "|" << centro << "|";
@@ -663,6 +711,8 @@ void dibujarMapa(Jugador& j1, Jugador& j2)
 
 	Console::ForegroundColor = ConsoleColor::White;
 }
+
+//fors para dibujar los marcos
 void dibujarMarco() {
 	Console::ForegroundColor = ConsoleColor::White;
 	for (int i = 1; i <= ANCHO_PANTALLA-1; i++) {
@@ -708,6 +758,8 @@ void dibujarMarco() {
 		}
 	}
 }
+
+//limpiamos el mapa para que se actualice
 void limpiarZonaMapa()
 {
 	int borde = (ALTO_PANTALLA / 2) + 10;
@@ -717,6 +769,7 @@ void limpiarZonaMapa()
 		cout << string(ANCHO_PANTALLA-borde-4, ' ');
 	}
 }
+//mostramos ifnromacion general de ambos jugadores 
 void mostrarEstadoJugadores(Jugador& j1, Jugador& j2,string jugadorTurno,int ultimoDado)
 {
 	for (int y = 1; y <= 12; y++)
@@ -763,6 +816,7 @@ bool juegoTerminado(Jugador& j1, Jugador& j2)
 
 	return j1Final || j2Final;
 }
+//aca es la interfaz de objetos donde estan infromacion mas especifica del juego
 void intefazObjetos(Jugador& j, int x, int y) {
 
 	Console::SetCursorPosition(x + 10, y);
@@ -813,6 +867,7 @@ int determinarGanador(Jugador& j1, Jugador& j2) {
 
 	return 0; // empataron
 }
+//una interfaz (esto lo hizo la ia) xd 
 void interfazFinJuego(Jugador& j1, Jugador& j2) {
 	system("cls");
 
@@ -879,12 +934,15 @@ void interfazFinJuego(Jugador& j1, Jugador& j2) {
 	Console::ResetColor();
 	_getch();
 }
+//aca lo importante, el nucleo del juego
 void iniciarJuego(Jugador& j, Jugador& j2)
 {
 
 
-	bool turno = true;
+	bool turno = true; 
 	bool pokeMathJugado = false;
+	bool artiJugado = false;
+	bool reflejosJugado = false;
 	j.mapaActual = 0;
 	j.posicion = 0;
 	j.monedas = 0;
@@ -894,38 +952,40 @@ void iniciarJuego(Jugador& j, Jugador& j2)
 	j2.posicion = 0;
 	j2.monedas = 0;
 	j2.estrellas = 0;
-
+	//Inicializacion de los datos del struct jugador, en este caso tenemos dos jugadores los cuales estan inicialiados en el main 
 	srand(time(NULL));
 
 	system("cls");
-	fondoMapa(j.mapaActual);
-	dibujarMarco();
+	fondoMapa(j.mapaActual); //ponemos el fondo del mapa
+	dibujarMarco(); //dibujamos los marcos
 
-	while (true)
+	while (true) // comenzamos el while
 	{
+		//esto es para detectar si un juego fue terminado el cual solo se ejecutaria una vez
 		if (juegoTerminado(j, j2))
 		{
 			interfazFinJuego(j, j2);
 			break;
 		}
+		//interfaz de ambos objetos
 		intefazObjetos(j, 3, 20);
 		intefazObjetos(j2, 55, 20);
 
 		Console::SetCursorPosition(5, 28);
-		cout << "Presione ESPACIO para lanzar el dado (ESC para salir) ";
+		cout << "Presione ESPACIO para lanzar el dado (ESC para salir) "; //feedback sobre cuando lanzar un dado
 
 		char tecla = _getch();
 		
-		if (tecla == 27) 
+		if (tecla == 27)  //aca metemos espacio
 			break;
 
 		if (tecla != ' ')
 			continue;
 
-		limpiarZonaMapa();
+		limpiarZonaMapa(); //limpiamos el mapa o sea actualizamos
 
 		int dado = 0;
-
+		//comienza el turno del jugador 1
 		if (turno)
 		{
 			int mapaAnterior = j.mapaActual;
@@ -936,7 +996,7 @@ void iniciarJuego(Jugador& j, Jugador& j2)
 				fondoMapa(j.mapaActual);
 				dibujarMarco();
 			}
-			eventosCasillas(j,j2,pokeMathJugado);
+			eventosCasillas(j,j2,pokeMathJugado, artiJugado, reflejosJugado);
 			dibujarMapa(j, j2);
 
 			mostrarEstadoJugadores(
@@ -946,7 +1006,7 @@ void iniciarJuego(Jugador& j, Jugador& j2)
 				dado
 			);
 		}
-		else
+		else //turno del jugador 2
 		{
 			int mapaAnterior = j2.mapaActual;
 			dado = turnoJugador(j2);
@@ -957,7 +1017,7 @@ void iniciarJuego(Jugador& j, Jugador& j2)
 				fondoMapa(j2.mapaActual);
 				dibujarMarco();
 			}
-			eventosCasillas(j2,j, pokeMathJugado);
+			eventosCasillas(j2,j, pokeMathJugado, artiJugado, reflejosJugado);
 			dibujarMapa(j2, j);
 
 			mostrarEstadoJugadores(
@@ -968,7 +1028,7 @@ void iniciarJuego(Jugador& j, Jugador& j2)
 			);
 		}
 
-		turno = !turno;
+		turno = !turno; //se acaba un turno, esto es porque turno = true = al jugador 1 y el !turno = jugador 2
 	}
 	
 }

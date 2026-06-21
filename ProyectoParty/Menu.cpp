@@ -6,13 +6,16 @@
 #define ALTO_PANTALLA 30
 using namespace std;
 using namespace System;
+//aca es para setear el ancho de la pantalla  con valores define 
 void pantalla() {
 	Console::SetWindowSize(ANCHO_PANTALLA, ALTO_PANTALLA);
 	Console::CursorVisible = false;
 }
+
 void menuJuego() {
 
 }
+//aca menu de configuracion
 void menuConfiguracion() {
 	system("cls");
 	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA / 10));
@@ -25,6 +28,7 @@ void menuConfiguracion() {
 	cout << " \\___)\\__/ \\_)__)(__)  (__)\\___/";
 	_getch();
 }
+//aca es mathParty, esto fue lo primero que se programo por eso esta asui 
 void tituloPrincipal() {
 	Console::ForegroundColor = ConsoleColor::Blue;
 	Console::SetCursorPosition(ANCHO_PANTALLA / 10, (ALTO_PANTALLA / 6));
@@ -77,24 +81,25 @@ void tituloPrincipal() {
 
 }
 
+//aca esta lo mas importante
 void menuPrincipal() {
-	pantalla();
+	pantalla(); // declaramos la pantalla
 	//Math
 	char tecla;
-	Jugador jugadores[2];
+	Jugador jugadores[2]; // inicializamos los dos jugadores 
 
-	while (true){
+	while (true){ // el while importante 
 		system("cls");
-		tituloPrincipal();
+		tituloPrincipal();//inicializamos el titulo
 		//Falta el config
 			tecla = _getch();
 			switch (tecla) {
-			case '1':
+			case '1': // si presiona 1 entonces jugamos 
 				ingresoDatos(jugadores);
 				iniciarJuego(jugadores[0],jugadores[1]);
 				break;
 			case '2': 
-				menuConfiguracion();
+				menuConfiguracion(); //configuracion la cual aun no se puede configurar
 				break;
 			case '3':
 				return;
