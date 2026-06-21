@@ -486,8 +486,8 @@ void juego_artilleria(Jugador& personaje1, Jugador& personaje2) {
     menu(ancho, alto);
 
     //VIDA DE LOS BICHOS
-    int saludJ1 = 1;
-    int saludJ2 = 1;
+    int saludJ1 = 100;
+    int saludJ2 = 100;
     int turno = 1; // 1 = Jugador Izquierda, 2 = Jugador Derecha
 
     //juego principal
