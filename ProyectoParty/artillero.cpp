@@ -544,12 +544,15 @@ void juego_artilleria(Jugador& personaje1, Jugador& personaje2) {
         cout << "VICTORIA DEL JUGADOR 2!";
         personaje2.estrellas += 1;
         personaje2.monedas += 20;
+        personaje2.minijuegosGanados += 1;
 
     }
     else {
         cout << "VICTORIA DEL JUGADOR 1!";
         personaje1.estrellas += 1;
         personaje1.monedas += 20;
+        personaje1.minijuegosGanados += 1;
+
     }
     Console::SetCursorPosition((ancho - 30) / 2, alto / 2 + 1);
     cout << "==============================";
