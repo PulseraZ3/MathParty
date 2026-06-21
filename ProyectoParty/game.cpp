@@ -8,6 +8,7 @@ using namespace std;
 using namespace System;
 #define MAPAS 5
 #define CASILLAS 15
+
 char mapas[MAPAS][CASILLAS] =
 {
 	{'C','C','C','O','C','C','O','C','C','C','C','C','O','C','R'},
@@ -408,6 +409,10 @@ void ingresoDatos(Jugador jugadores[]) {
 	}
 }
 void dibujarAvatar(Jugador& j, int x, int y) {
+	for (int i = 1; i < 7; i++) {
+		Console::SetCursorPosition(x, y + i);
+		cout << string(20, ' ');
+	}
 	for (int i = 1;i < 7;i++) {
 		Console::SetCursorPosition(x, y + i);
 		cout << j.dibujo[i];
@@ -589,13 +594,17 @@ void fondoMapa(int mapa) {
 		break;
 	}
 }
-void eventosCasillas(Jugador& j,Jugador& j2) {
+void eventosCasillas(Jugador& j,Jugador& j2, bool& pokeMathJugado) {
 	char casillas = mapas[j.mapaActual][j.posicion];
 		if (casillas == 'O') {
 			j.monedas += 5;
 		}
-		if (casillas == 'R' && j.mapaActual == 2) {
+		if (casillas == 'R' && j.mapaActual == 2 && !pokeMathJugado) {
 			juegoPokeMath(j,j2);
+			pokeMathJugado = true;
+			Console::Clear();
+			fondoMapa(j.mapaActual);
+			dibujarMarco();
 		}
 
 	
@@ -773,11 +782,109 @@ void intefazObjetos(Jugador& j, int x, int y) {
 	cout << "Minijuegos Ganados: " << j.minijuegosGanados<< "   ";
 	Console::ResetColor();
 }
+// decide quien gana
+int determinarGanador(Jugador& j1, Jugador& j2) {
+	if (j1.estrellas != j2.estrellas) {
+		if (j1.estrellas > j2.estrellas) {
+			return 1;
+		}
+		else {
+			return 2;
+		}
+	}
+
+	if (j1.monedas != j2.monedas) {
+		if (j1.monedas > j2.monedas) {
+			return 1;
+		}
+		else {
+			return 2;
+		}
+	}
+
+	if (j1.minijuegosGanados != j2.minijuegosGanados) {
+		if (j1.minijuegosGanados > j2.minijuegosGanados) {
+			return 1;
+		}
+		else {
+			return 2;
+		}
+	}
+
+	return 0; // empataron
+}
+void interfazFinJuego(Jugador& j1, Jugador& j2) {
+	system("cls");
+
+	Console::ForegroundColor = ConsoleColor::Yellow;
+	Console::SetCursorPosition((ANCHO_PANTALLA / 2) - 9, 3);
+	cout << "JUEGO TERMINADO";
+
+	int ganador = determinarGanador(j1, j2);
+
+	Jugador* primero;
+	Jugador* segundo;
+
+	if (ganador == 2) {
+		primero = &j2;
+		segundo = &j1;
+	}
+	else {
+		primero = &j1;
+		segundo = &j2;
+	}
+
+	int baseX = (ANCHO_PANTALLA / 2) - 12;
+	int baseY = 8;
+
+	Console::ForegroundColor = ConsoleColor::Yellow;
+	Console::SetCursorPosition(baseX, baseY - 1);
+	cout << primero->nombre;
+	Console::SetCursorPosition(baseX, baseY);
+	cout << " _______ ";
+	Console::SetCursorPosition(baseX, baseY + 1);
+	cout << "|       |";
+	Console::SetCursorPosition(baseX, baseY + 2);
+	cout << "|   1   |";
+	Console::SetCursorPosition(baseX, baseY + 3);
+	cout << "|_______|";
+
+	Console::ForegroundColor = ConsoleColor::White;
+	Console::SetCursorPosition(baseX + 11, baseY + 1);
+	cout << segundo->nombre;
+	Console::SetCursorPosition(baseX + 11, baseY + 2);
+	cout << " _______ ";
+	Console::SetCursorPosition(baseX + 11, baseY + 3);
+	cout << "|       |";
+	Console::SetCursorPosition(baseX + 11, baseY + 4);
+	cout << "|   2   |";
+	Console::SetCursorPosition(baseX + 11, baseY + 5);
+	cout << "|_______|";
+
+	if (ganador == 0) {
+		Console::ForegroundColor = ConsoleColor::Cyan;
+		Console::SetCursorPosition((ANCHO_PANTALLA / 2) - 4, baseY - 3);
+		cout << "EMPATE";
+	}
+
+	Console::ForegroundColor = ConsoleColor::White;
+	int statsY = baseY + 8;
+	Console::SetCursorPosition(baseX - 5, statsY);
+	cout << j1.nombre << ": " << j1.estrellas << " estrellas, " << j1.monedas << " monedas, " << j1.minijuegosGanados << " minijuegos ganados";
+	Console::SetCursorPosition(baseX - 5, statsY + 1);
+	cout << j2.nombre << ": " << j2.estrellas << " estrellas, " << j2.monedas << " monedas, " << j2.minijuegosGanados << " minijuegos ganados";
+
+	Console::SetCursorPosition(baseX - 5, statsY + 3);
+	cout << "Presione cualquier tecla para salir...";
+	Console::ResetColor();
+	_getch();
+}
 void iniciarJuego(Jugador& j, Jugador& j2)
 {
 
 
 	bool turno = true;
+	bool pokeMathJugado = false;
 	j.mapaActual = 0;
 	j.posicion = 0;
 	j.monedas = 0;
@@ -798,13 +905,7 @@ void iniciarJuego(Jugador& j, Jugador& j2)
 	{
 		if (juegoTerminado(j, j2))
 		{
-			Console::SetCursorPosition(5, 27);
-			cout << string(115, ' '); 
-			Console::SetCursorPosition(5, 27);
-			Console::ForegroundColor = ConsoleColor::Yellow;
-			cout << "Juego terminado! Presione cualquier tecla para salir...";
-			Console::ForegroundColor = ConsoleColor::White;
-			_getch();
+			interfazFinJuego(j, j2);
 			break;
 		}
 		intefazObjetos(j, 3, 20);
@@ -835,7 +936,7 @@ void iniciarJuego(Jugador& j, Jugador& j2)
 				fondoMapa(j.mapaActual);
 				dibujarMarco();
 			}
-			eventosCasillas(j,j2);
+			eventosCasillas(j,j2,pokeMathJugado);
 			dibujarMapa(j, j2);
 
 			mostrarEstadoJugadores(
@@ -856,7 +957,7 @@ void iniciarJuego(Jugador& j, Jugador& j2)
 				fondoMapa(j2.mapaActual);
 				dibujarMarco();
 			}
-			eventosCasillas(j2,j);
+			eventosCasillas(j2,j, pokeMathJugado);
 			dibujarMapa(j2, j);
 
 			mostrarEstadoJugadores(

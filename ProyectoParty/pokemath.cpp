@@ -8,6 +8,7 @@
 
 using namespace std;
 using namespace System;
+
 void tituloInicio(int x, int y) {
 	string math[] =
 	{
@@ -114,6 +115,48 @@ void limpiarZonaMenu(int x, int y, int alto = 4, int ancho = 15) {
 		cout << string(ancho, ' ');
 	}
 }
+bool minijuegoFiguras(int x, int y) {
+	string pistas[4] = {
+		"No tiene lados, es redonda",
+		"Tiene 4 lados iguales y angulos rectos",
+		"Tiene 4 lados iguales pero angulos no rectos",
+		"Tiene 3 lados y 3 angulos"
+	};
+	string opciones[] = { "Circulo", "Rectangulo", "Rombo", "Triangulo" };
+	int correcta = rand() % 4;
+	int seleccion = 0;
+	int tecla;
+
+	limpiarZonaMenu(x, y, 6, 70);
+
+	Console::ForegroundColor = ConsoleColor::Cyan;
+	Console::SetCursorPosition(x, y);
+	cout << "Que figura es? " << pistas[correcta];
+	Console::ResetColor();
+
+	do {
+		for (int i = 0; i < 4; i++) {
+			Console::SetCursorPosition(x, y + 2 + i);
+			if (i == seleccion) {
+				Console::BackgroundColor = ConsoleColor::White;
+				Console::ForegroundColor = ConsoleColor::Black;
+			}
+			cout << opciones[i] << "      ";
+			Console::ResetColor();
+		}
+
+		tecla = _getch();
+		if (tecla == 224) {
+			tecla = _getch();
+			if (tecla == 72 && seleccion > 0) seleccion--; // flecha arriba
+			if (tecla == 80 && seleccion < 3) seleccion++; // flecha abajo
+		}
+	} while (tecla != 13); // Enter
+
+	limpiarZonaMenu(x, y, 6, 70); 
+
+	return seleccion == correcta;
+}
 int interfazAtaques(int x,int y) {
 	string opciones[] = { "LUCHA","MOCHILA" };
 	int seleccion = 0;
@@ -193,7 +236,9 @@ void turno(Jugador& personaje1, Jugador& personaje2,Pokemon& p1, Pokemon& p2) {
 			case 1:
 				//tacleada
 				if (!p2.protegido) {
-					p2.vida -= p1.ataque+(1-p2.defensa);
+					double mult = minijuegoFiguras(40, 20) ? 1.5 : 0.5;
+					p2.vida -= (p1.ataque+(1-p2.defensa))*mult;
+					mensajeBatalla(personaje1.nombre + (mult == 1.0 ? " acerto! Tacleada completa" : " fallo, Tacleada debil"));
 					mensajeBatalla(personaje1.nombre + " uso Tacleada");
 				}
 				else {
@@ -248,7 +293,9 @@ void turno(Jugador& personaje1, Jugador& personaje2,Pokemon& p1, Pokemon& p2) {
 			case 1:
 				//tacleada
 				if (!p1.protegido) {
-					p1.vida -= p2.ataque + (1 - p1.defensa);
+					double mult = minijuegoFiguras(40, 20) ? 1.5 : 0.5;
+					p1.vida -= (p2.ataque + (1 - p1.defensa))*mult;
+					mensajeBatalla(personaje1.nombre + (mult == 1.0 ? " acerto! Tacleada completa" : " fallo, Tacleada debil"));
 				}
 				else {
 					p1.protegido = false;
@@ -289,6 +336,18 @@ void turno(Jugador& personaje1, Jugador& personaje2,Pokemon& p1, Pokemon& p2) {
 		turnoJugador = !turnoJugador;
 
 	}
+	if (p1.vida <= 0) {
+		personaje2.estrellas += 1;
+		personaje2.minijuegosGanados += 1;
+		personaje2.monedas += 10;
+		mensajeBatalla(personaje2.nombre + " gano la batalla y obtuvo 1 estrella, 10 monedas");
+	}
+	else {
+		personaje1.estrellas += 1;
+		personaje1.minijuegosGanados += 1;
+		personaje1.monedas += 10;
+		mensajeBatalla(personaje1.nombre + " gano la batalla y obtuvo 1 estrella, 10 monedas");
+	}
 }
 void reglasPokeMath(int x,int y) {
 	string reglas[] = {
@@ -308,6 +367,7 @@ void reglasPokeMath(int x,int y) {
 	_getch();
 	Console::Clear();
 }
+
 void juegoPokeMath(Jugador& j1,Jugador& j2) {
 	Pokemon p1;
 	Pokemon p2;
@@ -317,5 +377,5 @@ void juegoPokeMath(Jugador& j1,Jugador& j2) {
 	intefazPokeMath();
 	turno(j1, j2, p1, p2);
 	_getch();
-
+	Console::Clear();
 }
