@@ -90,8 +90,8 @@ void menuPrincipal() {
 			tecla = _getch();
 			switch (tecla) {
 			case '1':
-				//ingresoDatos(jugadores);
-				iniciarJuego();
+				ingresoDatos(jugadores);
+				iniciarJuego(jugadores[0],jugadores[1]);
 				break;
 			case '2': 
 				menuConfiguracion();
