@@ -1,11 +1,29 @@
-﻿  reflejos.cpp
-C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\reflejos.cpp(19,2): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
-C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\reflejos.cpp(35,4): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
-C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\reflejos.cpp(222,2): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
-C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\reflejos.cpp(233,3): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
-C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\reflejos.cpp(262,2): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
-C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\reflejos.cpp(299,2): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
-C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\reflejos.cpp(347,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\reflejos.cpp(388,1): warning C4700: se utilizó la variable local 'tecla' sin inicializar
-  artillero.obj : se encontró un módulo MSIL; vinculación incremental deshabilitada para MSIL; ejecutando vínculo completo
+﻿  main.cpp
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(217,2): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(283,24): warning C4244: 'argumento': conversión de 'double' a 'const unsigned __int64'; posible pérdida de datos
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(827,4): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(843,3): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(851,3): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(855,3): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(859,3): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(951,10): warning C4244: 'inicializando': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(954,10): warning C4244: 'inicializando': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(959,3): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(968,2): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(1013,3): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(1024,4): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(1027,4): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(1035,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(1131,2): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(1147,4): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(1323,2): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(1334,3): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(1363,2): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(1400,2): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(1448,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(2265,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  .NETFramework,Version=v4.7.2.AssemblyAttributes.cpp
+  Generando código...
+C:\Users\Leona\source\repos\ProyectoParty\ProyectoParty\main.cpp(1489,1): warning C4700: se utilizó la variable local 'tecla' sin inicializar
+  main.obj : se encontró un módulo MSIL; vinculación incremental deshabilitada para MSIL; ejecutando vínculo completo
   ProyectoParty.vcxproj -> C:\Users\Leona\source\repos\ProyectoParty\x64\Debug\ProyectoParty.exe

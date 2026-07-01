@@ -123,12 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="artillero.cpp" />
-    <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="pokemath.cpp" />
-    <ClCompile Include="reflejos.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
