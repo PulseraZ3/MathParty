@@ -126,9 +126,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h" />
     <ClInclude Include="Jugador.h" />
-    <ClInclude Include="Menus.h" />
     <ClInclude Include="Objeto.h" />
     <ClInclude Include="pokemon.h" />
   </ItemGroup>

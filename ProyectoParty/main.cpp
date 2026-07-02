@@ -14,6 +14,7 @@ using namespace System;
 //aca es para setear el ancho de la pantalla  con valores define 
 #define MAPAS 4
 #define CASILLAS 15
+//120x30
 //definicion del mapa C = "Casilla comun" O = "casilla rara" y R = "juegos" solo un juego por mapa
 char mapas[MAPAS][CASILLAS] =
 {
@@ -555,13 +556,15 @@ void reglasPokeMath(int x, int y) {
 }
 
 void juegoPokeMath(Jugador& j1, Jugador& j2) {
-	Pokemon p1;
-	Pokemon p2;
+	Pokemon* p1 = new Pokemon();
+	Pokemon* p2 = new Pokemon();
 	Console::Clear();
 	tituloInicio(30, 10);
 	reglasPokeMath(20, 6);
 	intefazPokeMath();
-	turno(j1, j2, p1, p2);
+	turno(j1, j2, *p1, *p2);
+	delete p1;
+	delete p2;
 	_getch();
 	Console::Clear();
 }
@@ -1984,21 +1987,21 @@ void eventosCasillas(Jugador& j, Jugador& j2, bool& pokeMathJugado, bool& artiJu
 	if (casillas == 'O') {
 		j.monedas += 5;
 	}
-	if (casillas == 'R' && j.mapaActual == 2 && !pokeMathJugado) {
-		//juegoPokeMath(j, j2);
+	if (casillas == 'R' && j.mapaActual == 1 && !pokeMathJugado) {
+		juegoPokeMath(j, j2);
 		pokeMathJugado = true;
 		Console::Clear();
 		fondoMapa(j.mapaActual);
 		dibujarMarco();
 	}
-	if (casillas == 'R' && j.mapaActual == 4 && !artiJugado) {
+	if (casillas == 'R' && j.mapaActual == 3 && !artiJugado) {
 		//juego_artilleria(j, j2);
 		artiJugado = true;
 		Console::Clear();
 		fondoMapa(j.mapaActual);
 		dibujarMarco();
 	}
-	if (casillas == 'R' && j.mapaActual == 1 && !reflejosJugado) {
+	if (casillas == 'R' && j.mapaActual == 0 && !reflejosJugado) {
 		//juegoreflejos(j, j2);
 		reflejosJugado = true;
 		Console::Clear();
